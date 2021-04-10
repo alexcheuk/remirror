@@ -662,14 +662,14 @@ export const extensionBlockquoteStyledCss: ReturnType<typeof css> = css`
   /**
  * Styles extracted from: packages/remirror__theme/src/extension-blockquote-theme.ts
  */
-  .remirror-editor .Prosemirror blockquote {
+  .remirror-editor.Prosemirror blockquote {
     border-left: 3px solid var(--rmr-hue-gray-3);
     margin-left: 0;
     margin-right: 0;
     padding-left: 10px;
     font-style: italic;
   }
-  .remirror-editor .Prosemirror blockquote p {
+  .remirror-editor.Prosemirror blockquote p {
     color: #888;
   }
 `;
@@ -3461,12 +3461,12 @@ export const extensionGapCursorStyledCss: ReturnType<typeof css> = css`
   /**
  * Styles extracted from: packages/remirror__theme/src/extension-gap-cursor-theme.ts
  */
-  .remirror-editor .ProseMirror-gapcursor {
+  .remirror-editor.ProseMirror .ProseMirror-gapcursor {
     display: none;
     pointer-events: none;
     position: absolute;
   }
-  .remirror-editor .ProseMirror-gapcursor:after {
+  .remirror-editor.ProseMirror .ProseMirror-gapcursor:after {
     content: '';
     display: block;
     position: absolute;
@@ -3486,9 +3486,8 @@ export const extensionGapCursorStyledCss: ReturnType<typeof css> = css`
       visibility: hidden;
     }
   }
-  .remirror-editor .ProseMirror-focused.ProseMirror-gapcursor,
-  .remirror-editor .ProseMirror-focused .ProseMirror-gapcursor,
-  .remirror-editor.ProseMirror-focused.ProseMirror-gapcursor {
+  .remirror-editor.ProseMirror .ProseMirror-focused .ProseMirror-gapcursor,
+  .remirror-editor.ProseMirror.ProseMirror-focused .ProseMirror-gapcursor {
     display: block;
   }
 `;
@@ -3554,7 +3553,7 @@ export const extensionNodeFormattingStyledCss: ReturnType<typeof css> = css`
   /**
  * Styles extracted from: packages/remirror__theme/src/extension-node-formatting-theme.ts
  */
-  .remirror-editor .Prosemirror {
+  .remirror-editor.Prosemirror {
   }
 `;
 
@@ -3576,7 +3575,7 @@ export const extensionPositionerStyledCss: ReturnType<typeof css> = css`
   /**
  * Styles extracted from: packages/remirror__theme/src/extension-positioner-theme.ts
  */
-  .remirror-editor {
+  .remirror-editor.ProseMirror {
     position: relative;
   }
 
@@ -3604,46 +3603,343 @@ export const extensionTablesStyledCss: ReturnType<typeof css> = css`
   /**
  * Styles extracted from: packages/remirror__theme/src/extension-tables-theme.ts
  */
-  .remirror-editor .ProseMirror .tableWrapper {
+  .remirror-editor.ProseMirror {
+    /* Give selected cells a blue overlay */
+    /* We don't need this anymore -- 2021-04-03 ocavue */
+  }
+  .remirror-editor.ProseMirror .tableWrapper {
     overflow-x: auto;
   }
-  .remirror-editor .ProseMirror table {
+  .remirror-editor.ProseMirror table {
     border-collapse: collapse;
     table-layout: fixed;
     width: 100%;
     overflow: hidden;
   }
-  .remirror-editor .ProseMirror td,
-  .remirror-editor .ProseMirror th {
+  .remirror-editor.ProseMirror td,
+  .remirror-editor.ProseMirror th {
     vertical-align: top;
     box-sizing: border-box;
     position: relative;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--rmr-color-table-default-border);
   }
-  .remirror-editor .ProseMirror .column-resize-handle {
+  .remirror-editor.ProseMirror .column-resize-handle {
     position: absolute;
     right: -2px;
     top: 0;
     bottom: 0;
     width: 4px;
-    z-index: 20;
-    background-color: var(--rmr-hue-blue-9);
+    z-index: 40;
+    background-color: var(--rmr-hue-blue-7);
     pointer-events: none;
   }
-  .remirror-editor .ProseMirror .resize-cursor {
+  .remirror-editor.ProseMirror.resize-cursor {
     cursor: ew-resize;
     cursor: col-resize;
   }
-  /* Give selected cells a blue overlay */
-  .remirror-editor .ProseMirror .selectedCell:after {
-    z-index: 2;
+  /*
+    .selectedCell:after {
+      z-index: 2;
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(200, 200, 255, 0.4);
+      pointer-events: none;
+    }
+    */
+  .remirror-editor.ProseMirror th.selectedCell,
+  .remirror-editor.ProseMirror td.selectedCell {
+    border-style: double;
+    border-color: var(--rmr-color-table-selected-border);
+    background-color: var(--rmr-color-table-selected-cell);
+  }
+
+  .remirror-table-colgroup > col:first-of-type {
+    width: 13px;
+    overflow: visible;
+  }
+
+  .remirror-controllers-toggle {
+    visibility: hidden;
+  }
+
+  .remirror-table-show-controllers .remirror-controllers-toggle {
+    visibility: visible;
+  }
+
+  .remirror-table-insert-button {
     position: absolute;
-    content: '';
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: rgba(200, 200, 255, 0.4);
-    pointer-events: none;
+    width: 18px;
+    height: 18px;
+    z-index: 25;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 150ms ease;
+
+    background-color: #dcdcdc;
+  }
+
+  .remirror-table-insert-button svg {
+    fill: #ffffff;
+  }
+
+  .remirror-table-insert-button:hover {
+    background-color: #136bda;
+  }
+
+  .remirror-table-insert-button:hover svg {
+    fill: #ffffff;
+  }
+
+  .remirror-table-delete-row-column-inner-button {
+    top: calc(var(--remirror-table-delete-button-y) - 9px);
+    left: calc(var(--remirror-table-delete-button-x) - 9px);
+    width: 18px;
+    height: 18px;
+
+    position: absolute;
+    z-index: 30;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #cecece;
+    transition: background-color 150ms ease;
+  }
+
+  .remirror-table-delete-row-column-inner-button:hover {
+    background-color: #ff7884;
+  }
+
+  .remirror-table-with-controllers {
+    /* Space for marks */
+    margin-top: 40px;
+
+    /* To make controller's 'height: 100%' works, table must set its own height. */
+    height: 1px;
+  }
+
+  /* To show marks */
+
+  .ProseMirror table.remirror-table-with-controllers {
+    overflow: visible;
+  }
+
+  .remirror-table-waitting-controllers {
+    /* Hide the table before controllers injected */
+    display: none;
+  }
+
+  /* First row contains one corner controller and multiple column controllers */
+
+  .remirror-table-tbody-with-controllers > tr:nth-of-type(1) {
+    height: 12px;
+    overflow: visible;
+  }
+
+  /* First controller cell is the corner controller */
+
+  .remirror-table-tbody-with-controllers > tr:nth-of-type(1) th:nth-of-type(1) {
+    overflow: visible;
+    padding: 0;
+    cursor: pointer;
+    z-index: 15;
+    position: relative;
+    height: 12px;
+    width: 12px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(1)
+    div.remirror-table-controller-wrapper {
+    overflow: visible;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 12px;
+    height: 12px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(1)
+    div.remirror-table-controller-trigger-area {
+    flex: 1;
+    position: relative;
+    z-index: 10; /* Style for debug. Use linear-gradient as background so that we can differentiate two neighbor areas. */ /* background: linear-gradient(to left top, rgba(0, 255, 100, 0.2), rgba(200, 100, 255, 0.2)); */
+    display: none;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(1)
+    div.remirror-table-controller-mark-row-corner {
+    bottom: -2px;
+    left: -12px;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: var(--rmr-color-table-mark);
+    border-width: 2px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(1)
+    div.remirror-table-controller-mark-column-corner {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: var(--rmr-color-table-mark);
+    border-width: 2px;
+    right: -2px;
+    top: -12px;
+  }
+
+  /* Second and more cells are column controllers */
+
+  .remirror-table-tbody-with-controllers > tr:nth-of-type(1) th:nth-of-type(n + 2) {
+    overflow: visible;
+    padding: 0;
+    cursor: pointer;
+    z-index: 15;
+    position: relative;
+    height: 12px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(n + 2)
+    div.remirror-table-controller-wrapper {
+    overflow: visible;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    height: 12px;
+    flex-direction: row;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(n + 2)
+    div.remirror-table-controller-trigger-area {
+    flex: 1;
+    position: relative;
+    z-index: 10; /* Style for debug. Use linear-gradient as background so that we can differentiate two neighbor areas. */ /* background: linear-gradient(to left top, rgba(0, 255, 100, 0.2), rgba(200, 100, 255, 0.2)); */
+    height: 36px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(n + 2)
+    div.remirror-table-controller-mark-row-corner {
+    display: none;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(1)
+    th:nth-of-type(n + 2)
+    div.remirror-table-controller-mark-column-corner {
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: var(--rmr-color-table-mark);
+    border-width: 2px;
+    right: -2px;
+    top: -12px;
+  }
+
+  /* Second and more rows containes row controllers */
+
+  /* First controller cell in each row is a row controller */
+
+  .remirror-table-tbody-with-controllers > tr:nth-of-type(n + 2) th {
+    overflow: visible;
+    padding: 0;
+    cursor: pointer;
+    z-index: 15;
+    position: relative;
+    width: 12px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(n + 2)
+    th
+    div.remirror-table-controller-wrapper {
+    overflow: visible;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+    width: 12px;
+    flex-direction: column;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(n + 2)
+    th
+    div.remirror-table-controller-trigger-area {
+    flex: 1;
+    position: relative;
+    z-index: 10; /* Style for debug. Use linear-gradient as background so that we can differentiate two neighbor areas. */ /* background: linear-gradient(to left top, rgba(0, 255, 100, 0.2), rgba(200, 100, 255, 0.2)); */
+    width: 36px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(n + 2)
+    th
+    div.remirror-table-controller-mark-row-corner {
+    bottom: -2px;
+    left: -12px;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: var(--rmr-color-table-mark);
+    border-width: 2px;
+  }
+
+  .remirror-table-tbody-with-controllers
+    > tr:nth-of-type(n + 2)
+    th
+    div.remirror-table-controller-mark-column-corner {
+    display: none;
+  }
+
+  /* Styles for default */
+
+  .remirror-table-tbody-with-controllers th.remirror-table-controller {
+    background-color: var(--rmr-color-table-default-controller);
+  }
+
+  /* Styles for selected */
+
+  .remirror-table-tbody-with-controllers th.selectedCell.remirror-table-controller {
+    background-color: var(--rmr-color-table-selected-controller);
+  }
+
+  /* Styles for predelete */
+
+  .remirror-table-show-predelete th.selectedCell.selectedCell.remirror-table-controller {
+    background-color: var(--rmr-color-table-predelete-controller);
+  }
+
+  .remirror-table-show-predelete th.selectedCell.selectedCell,
+  .remirror-table-show-predelete td.selectedCell.selectedCell {
+    border-color: var(--rmr-color-table-predelete-border);
+    background-color: var(--rmr-color-table-predelete-cell);
   }
 `;
 
@@ -3682,7 +3978,7 @@ export const extensionYjsStyledCss: ReturnType<typeof css> = css`
   /**
  * Styles extracted from: packages/remirror__theme/src/extension-yjs-theme.ts
  */
-  .remirror-editor .ProseMirror .ProseMirror-yjs-cursor {
+  .remirror-editor.ProseMirror .ProseMirror-yjs-cursor {
     position: absolute;
     border-left: black;
     border-left-style: solid;
@@ -3693,7 +3989,7 @@ export const extensionYjsStyledCss: ReturnType<typeof css> = css`
     pointer-events: none;
   }
 
-  .remirror-editor .ProseMirror .ProseMirror-yjs-cursor > div {
+  .remirror-editor.ProseMirror .ProseMirror-yjs-cursor > div {
     position: relative;
     top: -1.05em;
     font-size: 13px;
@@ -3710,16 +4006,7 @@ export const extensionYjsStyledCss: ReturnType<typeof css> = css`
     padding-left: 2px;
     padding-right: 2px;
   }
-  .remirror-editor .ProseMirror > .ProseMirror-yjs-cursor:first-child {
-    margin-top: 16px;
-  }
-  .remirror-editor .ProseMirror p:first-child,
-  .remirror-editor .ProseMirror h1:first-child,
-  .remirror-editor .ProseMirror h2:first-child,
-  .remirror-editor .ProseMirror h3:first-child,
-  .remirror-editor .ProseMirror h4:first-child,
-  .remirror-editor .ProseMirror h5:first-child,
-  .remirror-editor .ProseMirror h6:first-child {
+  .remirror-editor.ProseMirror > .ProseMirror-yjs-cursor:first-child {
     margin-top: 16px;
   }
   .remirror-editor #y-functions {
@@ -3790,6 +4077,19 @@ export const themeStyledCss: ReturnType<typeof css> = css`
     --rmr-color-selection-shadow: inherit;
     --rmr-color-selection-text: HighlightText;
     --rmr-color-selection-caret: inherit;
+    --rmr-color-table-default-border: hsla(0, 0%, 80%, 1);
+    --rmr-color-table-default-cell: hsla(0, 0%, 40%, 1);
+    --rmr-color-table-default-controller: #dee2e6;
+    --rmr-color-table-selected-border: #1c7ed6;
+    --rmr-color-table-selected-cell: #d0ebff;
+    --rmr-color-table-selected-controller: #339af0;
+    --rmr-color-table-preselect-border: #1c7ed6;
+    --rmr-color-table-preselect-cell: hsla(0, 0%, 40%, 1);
+    --rmr-color-table-preselect-controller: #339af0;
+    --rmr-color-table-predelete-border: #f03e3e;
+    --rmr-color-table-predelete-cell: #ffe3e3;
+    --rmr-color-table-predelete-controller: #ff6b6b;
+    --rmr-color-table-mark: #91919196;
     --rmr-hue-gray-0: #f8f9fa;
     --rmr-hue-gray-1: #f1f3f5;
     --rmr-hue-gray-2: #e9ecef;

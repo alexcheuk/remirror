@@ -6,7 +6,7 @@ import { css } from '@linaria/core';
  * fix:css` to regenerate `@remirror/styles/all.css`.
  */
 export const EDITOR = css`
-  .ProseMirror {
+  &.ProseMirror {
     .ProseMirror-yjs-cursor {
       position: absolute;
       border-left: black;
@@ -34,16 +34,6 @@ export const EDITOR = css`
     }
 
     > .ProseMirror-yjs-cursor:first-child {
-      margin-top: 16px;
-    }
-
-    p:first-child,
-    h1:first-child,
-    h2:first-child,
-    h3:first-child,
-    h4:first-child,
-    h5:first-child,
-    h6:first-child {
       margin-top: 16px;
     }
   }

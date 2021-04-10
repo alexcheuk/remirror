@@ -40,7 +40,7 @@
     "dist"
   ],
   "dependencies": {
-    "@babel/runtime": "^7.13.7",
+    "@babel/runtime": "^7.13.10",
     "@remirror/core": "1.0.0-next.60",
     "@remirror/extension-react-component": "1.0.0-next.60",
     "@remirror/messages": "0.0.0",
@@ -49,7 +49,7 @@
   "devDependencies": {
     "@remirror/pm": "1.0.0-next.60",
     "@remirror/react": "1.0.0-next.60",
-    "@types/react": "^17.0.1",
+    "@types/react": "^17.0.2",
     "react": "^17.0.1"
   },
   "peerDependencies": {

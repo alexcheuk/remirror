@@ -102,9 +102,9 @@
   },
   {
     "name": "@remirror/core-types",
-    "limit": "0 KB",
+    "limit": "110 B",
     "path": "packages/remirror__core-types/dist/remirror-core-types.browser.esm.js",
-    "ignore": ["@remirror/pm", "@remirror/core-constants"],
+    "ignore": ["@remirror/pm", "@remirror/core-constants", "@remirror/types"],
     "running": false,
     "gzip": true
   },
@@ -115,6 +115,8 @@
     "ignore": [
       "@remirror/pm",
       "@types/node",
+      "domino",
+      "jsdom",
       "@remirror/core-constants",
       "@remirror/core-helpers",
       "@remirror/core-types",
@@ -395,7 +397,7 @@
   },
   {
     "name": "@remirror/extension-markdown",
-    "limit": "20 KB",
+    "limit": "25 KB",
     "path": "packages/remirror__extension-markdown/dist/remirror-extension-markdown.browser.esm.js",
     "ignore": ["@remirror/pm", "@remirror/core", "@remirror/messages"],
     "running": false,
@@ -509,6 +511,29 @@
       "@remirror/extension-react-component",
       "@remirror/messages",
       "@remirror/react-utils"
+    ],
+    "running": false,
+    "gzip": true
+  },
+  {
+    "name": "@remirror/extension-react-tables",
+    "limit": "20 KB",
+    "path": "packages/remirror__extension-react-tables/dist/remirror-extension-react-tables.browser.esm.js",
+    "ignore": [
+      "@remirror/pm",
+      "react",
+      "react-dom",
+      "@remirror/core",
+      "@remirror/core-utils",
+      "@remirror/extension-positioner",
+      "@remirror/extension-tables",
+      "@remirror/icons",
+      "@remirror/messages",
+      "@remirror/preset-core",
+      "@remirror/react-components",
+      "@remirror/react-core",
+      "@remirror/react-hooks",
+      "@remirror/theme"
     ],
     "running": false,
     "gzip": true
@@ -836,6 +861,14 @@
     "limit": "10 KB",
     "path": "packages/remirror__theme/dist/remirror-theme.browser.esm.js",
     "ignore": ["@remirror/core-types"],
+    "running": false,
+    "gzip": true
+  },
+  {
+    "name": "@remirror/types",
+    "limit": "0 KB",
+    "path": "packages/remirror__types/dist/remirror-types.browser.esm.js",
+    "ignore": [],
     "running": false,
     "gzip": true
   },
