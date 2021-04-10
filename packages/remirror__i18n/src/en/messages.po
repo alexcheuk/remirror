@@ -286,6 +286,11 @@ msgstr ""
 "success {Success Callout}\n"
 "other {Callout}}"
 
+#. Description for inserting a checkbox list into the editor.
+#: packages/remirror__messages/src/extension-list-messages.ts:12
+msgid "extension.command.toggle-checkbox-list.description"
+msgstr "Checkbox list"
+
 #. Description for the code block command.
 #: packages/remirror__messages/src/extension-code-block-messages.ts:7
 msgid "extension.command.toggle-code-block.description"

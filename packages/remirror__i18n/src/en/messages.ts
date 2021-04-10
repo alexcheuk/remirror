@@ -90,6 +90,7 @@
       },
     ],
   ],
+  'extension.command.toggle-checkbox-list.description': 'Checkbox list',
   'extension.command.toggle-code-block.description': 'Add a code block',
   'extension.command.toggle-code-block.label': 'Codeblock',
   'extension.command.toggle-code.description': 'Add inline code formatting to the selected text',
