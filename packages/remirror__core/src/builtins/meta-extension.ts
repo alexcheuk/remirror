@@ -64,8 +64,8 @@ export class MetaExtension extends PlainExtension<MetaOptions> {
     const createCommands = extension.createCommands;
 
     for (const name of Object.keys(decoratedCommands)) {
-      const command: AnyFunction<CommandFunction> = (extension as any)[name];
-      (extension as any)[name] = (...args: any[]): CommandFunction => (props) => {
+      const command: AnyFunction<CommandFunction> = extension[name];
+      extension[name] = (...args: any[]): CommandFunction => (props) => {
         const value = command(...args)(props);
 
         if (props.dispatch && value) {

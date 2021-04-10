@@ -289,17 +289,17 @@ export class DecorationsExtension extends PlainExtension<DecorationsOptions> {
     // Update the decorations with any added position trackers.
     for (const placeholder of added) {
       if (placeholder.type === 'inline') {
-        this.addInlinePlaceholder(placeholder as WithBase<InlinePlaceholder>, tr);
+        this.addInlinePlaceholder(placeholder, tr);
         continue;
       }
 
       if (placeholder.type === 'node') {
-        this.addNodePlaceholder(placeholder as WithBase<NodePlaceholder>, tr);
+        this.addNodePlaceholder(placeholder, tr);
         continue;
       }
 
       if (placeholder.type === 'widget') {
-        this.addWidgetPlaceholder(placeholder as WithBase<WidgetPlaceholder>, tr);
+        this.addWidgetPlaceholder(placeholder, tr);
         continue;
       }
     }
